@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -ex
+set -x
 
 STRESS_WOWLAN_DIR=/home/admin/stress_wowlan
 exec &> >(tee -a "$STRESS_WOWLAN_DIR/data/wowlan_stress.log")
@@ -67,7 +67,7 @@ check_wifi_funtions() {
     fi
     
     wait_nm_started
-    /snap/bin/network-manager.nmcli d status | grep wlan0 | grep connected || true
+    /snap/bin/network-manager.nmcli d status | grep wlan0 | grep connected
     if [ $? -ne 0 ]; then
         echo "Wifi lost connection" >> $STRESS_WOWLAN_FAIL_FILE
         error=true
