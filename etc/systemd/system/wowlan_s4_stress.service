@@ -1,0 +1,14 @@
+[Unit]
+Description=wowlan s4 stress test service
+ConditionPathExists=!/home/admin/stress_wowlan/pass
+ConditionPathExists=!/home/admin/stress_wowlan/fail
+After=hibernate.target network.target snap.bluez.bluez.service
+
+
+[Service]
+ExecStart=/bin/bash -c "/home/admin/stress_wowlan/bin/wowlan_stress.sh" > /dev/console
+Type=oneshot
+User=root
+
+[Install]
+WantedBy=hibernate.target
